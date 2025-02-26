@@ -1,0 +1,45 @@
+<div class="container mt-4 bg-white pad bor-rad">
+  <button
+    class="btn btn-outline-secondary mar-top-1 mar-bot-1"
+    (click)="idx = -1; isEditMode = 'new'"
+  >
+    <i class="bi bi-plus-lg"></i>
+    Add
+  </button>
+
+  <app-record-add
+    *ngIf="isEditMode"
+    [isEditMode]="isEditMode"
+    [idx]="idx"
+    (save)="saveStudent($event)"
+  />
+
+  <table class="table table-striped" *ngIf="!isEditMode">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let st of students; let i = index">
+        <td>{{ st?.name }}</td>
+        <td>{{ st?.age }}</td>
+        <td>{{ st?.email }}</td>
+        <td>
+          <button
+            class="btn btn-outline-warning btn-sm"
+            (click)="editRecord(i)"
+          >
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-danger btn-sm ms-2" (click)="deleteRecord(i)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

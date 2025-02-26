@@ -1,0 +1,200 @@
+/* You can add global styles to this file, and also import other style files */
+
+$bg-col: "#f2f5f7";
+
+html,
+body {
+    height: 100%;
+    background-color: "#f2f5f7" !important
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+}
+
+nav {
+    background-color: white;
+    padding: 0;
+    border-bottom: 1px solid #e1eaf2;
+}
+
+span,
+div {
+    font-size: 16px;
+}
+
+.lin-hig {
+    line-height: 24px;
+}
+
+.w {
+    width: 100vw;
+}
+
+.h {
+    height: 100vh;
+}
+
+.bor {
+    border: 1px solid #cecece
+}
+
+.bor-bot {
+    border-bottom: 1px solid #cecece
+}
+
+.bor-top {
+    border-top: 1px solid #cecece
+}
+
+.bor-rad {
+    border-radius: 6px;
+}
+
+.pad {
+    padding: 1rem;
+}
+
+.mar {
+    margin: 1rem;
+}
+
+.aut {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cur {
+    cursor: pointer;
+}
+
+.bold-500 {
+    font-weight: 500;
+}
+
+.bold-600 {
+    font-weight: 600;
+}
+
+//---flex-------------
+
+.flex {
+    display: flex;
+}
+
+.f-row {
+    flex-direction: row;
+}
+
+.f-col {
+    flex-direction: column;
+}
+
+.f-just-center {
+    justify-content: center;
+}
+
+.f-just-start {
+    justify-content: flex-start;
+}
+
+.f-just-end {
+    justify-content: flex-end;
+}
+
+.f-just-btw {
+    justify-content: space-between;
+}
+
+.f-just-around {
+    justify-content: space-around;
+}
+
+.f-just-evenly {
+    justify-content: space-evenly;
+}
+
+.f-align-center {
+    align-items: center;
+}
+
+.f-align-start {
+    align-items: flex-start;
+}
+
+.f-align-end {
+    align-items: flex-end;
+}
+
+.f-align-base {
+    align-items: baseline;
+}
+
+.f-wrap {
+    flex-wrap: wrap;
+}
+
+.f-nowrap {
+    flex-wrap: nowrap;
+}
+
+.mar-top-1 {
+    margin-top: 1rem;
+}
+
+.mar-top-2 {
+    margin-top: 2rem;
+}
+
+.mar-bot-1 {
+    margin-bottom: 1rem;
+}
+
+.mar-bot-2 {
+    margin-bottom: 2rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.max-wid-500 {
+    max-width: 500px;
+}
+
+.max-wid-1400 {
+    max-width: 500px;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.grey {
+    color: rgb(201, 207, 211);
+}
+
+a {
+    &:hover {
+        text-decoration: underline;
+        color: blue;
+    }
+
+    background-color: $bg-col;
+}
+
+//-------
+
+@media screen and (max-width: 650px) {
+    body {
+        font-size: 14px;
+    }
+
+    span,
+    div {
+        font-size: 14px;
+    }
+
+}
