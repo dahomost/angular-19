@@ -1,52 +1,58 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Student } from '../../models/student.model';
+import { Book } from '../../models/book.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentService {
-  private students: Student[] = [
-    { id: '1', name: 'John Doe', age: 20, email: 'john@example.com' },
-    { id: '2', name: 'Jane Smith', age: 22, email: 'jane@example.com' },
-    { id: '3', name: 'H. John Doe', age: 20, email: 'b-john@example.com' },
-    { id: '4', name: 'B. Jane Smith', age: 22, email: 'h-jane@example.com' },
-  ];
-
-  private studentsSubject = new BehaviorSubject<Student[]>(this.students);
-
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   // ✅ Get all students
   getStudents(): Observable<Student[]> {
-    return this.studentsSubject.asObservable();
+    const jsonFile = '/files/students.json';
+    return this.http.get<Student[]>(jsonFile);
   }
 
-  // ✅ Get a student by ID
-  getStudentById(id: string): Observable<Student | undefined> {
-    const student = this.students.find((s) => s.id === id);
-    return of(student); // Use 'of' to return as an Observable
+  getBooks(): Observable<Book[]> {
+    const jsonFile = '/files/books.json';
+    return this.http.get<Book[]>(jsonFile);
   }
 
-  // ✅ Add a new student
-  addStudent(student: Student): void {
-    student.id = (1000000 * Math.random()).toString(); // Generate a simple unique ID
-    this.students.push(student);
-    this.studentsSubject.next(this.students);
-  }
+  // private http = inject(HttpClient);
 
-  // ✅ Update an existing student
-  updateStudent(updatedStudent: Student): void {
-    const index = this.students.findIndex((s) => s.id === updatedStudent.id);
-    if (index !== -1) {
-      this.students[index] = updatedStudent;
-      this.studentsSubject.next(this.students);
-    }
-  }
+  // getProductDetails(id: number): Observable<Product> {
+  //   return this.http.get<Product>(`${this.API_URL}/${id}`);
+  // }
 
-  // ✅ Delete a student
-  deleteRecord(idx: number): void {
-    this.students.splice(idx, 1);
-    this.studentsSubject.next(this.students);
-  }
+  // // ✅ Get a student by ID
+  // getStudentById(id: string): Observable<Student | undefined> {
+  //   const student = this.students.find((s) => s.id === id);
+  //   return of(student); // Use 'of' to return as an Observable
+  // }
+
+  // // ✅ Add a new student
+  // addStudent(student: Student): void {
+  //   student.id = (1000000 * Math.random()).toString(); // Generate a simple unique ID
+  //   this.students.push(student);
+  //   this.studentsSubject.next(this.students);
+  // }
+
+  // // ✅ Update an existing student
+  // updateStudent(updatedStudent: Student): void {
+  //   const index = this.students.findIndex((s) => s.id === updatedStudent.id);
+  //   if (index !== -1) {
+  //     this.students[index] = updatedStudent;
+  //     this.studentsSubject.next(this.students);
+  //   }
+  // }
+
+  // // ✅ Delete a student
+  // deleteRecord(id: string): void {
+  //   const idx = this.students.findIndex((el: any) => el.id === id);
+  //   if (idx >= 0) this.students.splice(idx, 1);
+  //   this.studentsSubject.next(this.students);
+  // }
 }

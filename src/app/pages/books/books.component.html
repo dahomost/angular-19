@@ -4,15 +4,15 @@
     (click)="isEditMode = 'new'"
   >
     <i class="bi bi-plus-lg"></i>
-    Add
+    New Book
   </button>
 
   @if (isEditMode) {
 
-  <app-student-add
+  <app-book-add
     [isEditMode]="isEditMode"
-    [rec]="student"
-    (save)="saveStudent($event)"
+    [rec]="book"
+    (save)="saveRecord($event)"
   />
 
   } @else {
@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (st of students; track st.id; let i = $index) {
+      @for (st of books; track st.id; let i = $index) {
 
       <tr>
         <td>{{ st?.name }}</td>

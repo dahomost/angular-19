@@ -1,51 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Student } from '../../models/student.model';
-import { StudentService } from '../../services/student/student.service';
+
+import {
+  loadStudents,
+  addStudent,
+  updateStudent,
+  deleteStudent,
+} from '../../store/actions/student.actions';
+
+import { selectAllStudents } from '../../store/selectors/student.selectors';
+import { AddComponent } from '../../components/student/add/add.component';
 
 @Component({
   selector: 'app-student',
-  standalone: false,
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss'],
+  imports: [AddComponent],
 })
 export class StudentsComponent implements OnInit {
   students: Student[] = [];
+  student: any = {};
   isEditMode = '';
-  idx: number = -1;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private ss: StudentService
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.ss.getStudents().subscribe({
-      next: (res: Student[]) => (this.students = res),
-      error: (err) => console.log('err-=>', err),
-      complete: () => console.log('complete'),
+    this.store.select(selectAllStudents).subscribe((st: any) => {
+      this.students = st && st.length > 0 ? st : [];
+      console.log('student.compo -=> state.students', this.students);
     });
+    this.store.dispatch(loadStudents());
   }
 
   saveStudent(event: any) {
-    console.log('event -=.', event);
-    if (event.isEditMode === 'edit') {
-      this.ss.updateStudent(event.data);
-    } else if (event.isEditMode === 'new') {
-      this.ss.addStudent(event.data);
+    const student: Student = event.data ? event.data : {};
+
+    if (event.isEditMode === 'edit')
+      this.store.dispatch(updateStudent({ student }));
+    else if (event.isEditMode === 'new') {
+      student.id = Math.round(1000000 * Math.random()).toString(); // Generate a unique ID
+      this.store.dispatch(addStudent({ student }));
     }
-    this.idx = 0;
+
     this.isEditMode = '';
   }
 
-  editRecord(index: number) {
-    this.idx = index;
+  editRecord(student: Student) {
     this.isEditMode = 'edit';
-    console.log('update rec idx -=>', index, this.idx);
+    this.student = student;
   }
 
-  deleteRecord(index: number) {
-    this.ss.deleteRecord(index);
+  deleteRecord(id: string) {
+    this.store.dispatch(deleteStudent({ id: id }));
   }
 }

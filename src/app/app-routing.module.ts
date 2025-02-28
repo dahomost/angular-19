@@ -14,9 +14,9 @@ const routes: Routes = [
       import('./pages/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
-    path: 'auth',
+    path: 'books',
     loadChildren: () =>
-      import('./pages/auth/auth.module').then((m) => m.AuthModule),
+      import('./pages/books/books.module').then((m) => m.BooksModule),
   },
   { path: '**', redirectTo: '/students' }, // Wildcard route
 ];

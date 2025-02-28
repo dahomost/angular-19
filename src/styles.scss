@@ -177,12 +177,22 @@ div {
 }
 
 a {
+    padding: 0 1rem;
+    border-radius: 6px;
+
     &:hover {
         text-decoration: underline;
         color: blue;
+        background-color: rgb(198, 202, 204);
+        cursor: pointer;
+
     }
 
-    background-color: $bg-col;
+    &:active {
+        text-decoration: underline;
+        color: blue;
+        background-color: rgb(198, 202, 204);
+    }
 }
 
 //-------

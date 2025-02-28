@@ -30,18 +30,29 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a
-              class="nav-link active"
+              class="nav-link"
+              (click)="openPage('/students')"
               aria-current="students"
-              routerLink="/students"
+              >Home</a
             >
-              Home
-            </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" routerLink="/profile">Profile</a>
+            <a
+              class="nav-link"
+              (click)="openPage('/profile')"
+              aria-current="profile"
+              >Profile</a
+            >
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" routerLink="/contact">Contact</a>
+            <a
+              class="nav-link"
+              (click)="openPage('/books')"
+              aria-current="books"
+              >Books</a
+            >
           </li>
         </ul>
       </div>

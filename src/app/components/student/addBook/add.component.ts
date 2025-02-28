@@ -1,25 +1,25 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Student } from '../../../models/student.model';
 import { FormsModule } from '@angular/forms';
+import { Book } from '../../../models/book.model';
 
 @Component({
-  selector: 'app-student-add',
+  selector: 'app-book-add',
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
   imports: [FormsModule],
 })
-export class AddComponent {
+export class AddBookComponent {
   @Input() rec: any;
   @Input() isEditMode: string = 'new';
   @Output() save: EventEmitter<any> = new EventEmitter();
 
-  student: Student = { id: '0', name: '', age: 0, email: '' };
+  book: Book = { id: '0', name: '', age: 0, email: '' };
 
   ngOnInit(): void {
-    this.student = { ...this.rec };
+    this.book = { ...this.rec };
   }
 
   saveRecord() {
-    this.save.emit({ isEditMode: this.isEditMode, data: this.student });
+    this.save.emit({ isEditMode: this.isEditMode, data: this.book });
   }
 }
